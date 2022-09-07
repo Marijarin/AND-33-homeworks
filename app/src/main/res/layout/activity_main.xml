@@ -4,15 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/common_spacing"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/posts_avatar_size"
+        android:layout_height="@dimen/posts_avatar_size"
+        android:layout_margin="@dimen/common_spacing"
+        android:contentDescription="@string/description_post_author_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@sample/posts_avatars" />
+
     <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/published"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="@sample/posts.json/data/author" />
+
+    <TextView
+        android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nmedia"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        tools:text="@sample/posts.json/data/published" />
+
+    <ImageButton
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_menu"
+        android:padding="@dimen/common_spacing"
+        android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="avatar, published, menu" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing"
+        android:autoLink="web"
+        app:layout_constraintTop_toTopOf="@id/barrierTop"
+        tools:text="@sample/posts.json/data/content" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="content" />
+
+    <ImageView
+        android:id="@+id/likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/common_spacing"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_likes"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintEnd_toStartOf="@id/number_of_likes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle" />
+
+    <TextView
+        android:id="@+id/number_of_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/common_spacing"
+        app:layout_constraintEnd_toStartOf="@id/shares"
+        app:layout_constraintStart_toEndOf="@id/likes"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle"
+        tools:text="@sample/posts.json/data/numberOfLikes" />
+
+    <ImageView
+        android:id="@+id/shares"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/common_spacing"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_shares"
+        android:src="@drawable/ic_baseline_share_24"
+        app:layout_constraintEnd_toStartOf="@id/number_of_shares"
+        app:layout_constraintStart_toEndOf="@id/number_of_likes"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle" />
+
+    <TextView
+        android:id="@+id/number_of_shares"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/common_spacing"
+        app:layout_constraintStart_toEndOf="@id/shares"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle"
+        tools:text="@sample/posts.json/data/numberOfShares" />
+
+    <TextView
+        android:id="@+id/number_of_impressions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle"
+        tools:text="50" />
+
+    <ImageView
+        android:id="@+id/impressions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_impressions"
+        android:layout_marginVertical="@dimen/common_spacing"
+        android:src="@drawable/ic_baseline_remove_red_eye_24"
+        app:layout_constraintEnd_toStartOf="@id/number_of_impressions"
+        app:layout_constraintTop_toBottomOf="@id/barrierMiddle" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
