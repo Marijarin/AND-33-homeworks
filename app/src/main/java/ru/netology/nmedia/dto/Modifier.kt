@@ -1,6 +1,6 @@
 package ru.netology.nmedia.dto
 
-interface Counter {
+interface Modifier {
     fun countModifier(count: Int): String {
 
         return when (count) {

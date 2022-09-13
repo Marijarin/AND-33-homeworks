@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.dto.Counter
+import ru.netology.nmedia.dto.Modifier
 import ru.netology.nmedia.dto.Post
 
 
-class MainActivity : AppCompatActivity(), Counter {
+class MainActivity : AppCompatActivity(), Modifier {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity(), Counter {
                 if (post.likedByMe) post.likes++ else post.likes--
                 likeCount?.text = post.likes.toString()
             }
+            root?.setOnClickListener{
+                Log.d("stuff", "root")
+            }
+
             share?.setOnClickListener {
                 Log.d("stuff", "share")
                 share.setImageResource(R.drawable.ic_baseline_share_24)
