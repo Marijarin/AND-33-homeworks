@@ -1,4 +1,4 @@
-package ru.netology.nmedia.repository
+package ru.netology.nmedia
 
 interface Modifier {
     fun countModifier(count: Int): String {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
-class PostRepositoryInMemoryImpl : PostRepository, Modifier {
+class PostRepositoryInMemoryImpl : PostRepository {
     private var likeCount = 5
     private var shareCount = 990
     private var impressionCount = 999_999
@@ -13,9 +13,9 @@ class PostRepositoryInMemoryImpl : PostRepository, Modifier {
         author = "Нетология. Университет интернет-профессий будущего",
         content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
         published = "21 мая в 18:36",
-        likeCount = countModifier(likeCount),
-        shareCount = countModifier(shareCount),
-        impressionCount = countModifier(impressionCount),
+        likeCount = 5,
+        shareCount = 990,
+        impressionCount = 999_999,
         likedByMe = false
     )
     private val data = MutableLiveData(post)
@@ -27,19 +27,19 @@ class PostRepositoryInMemoryImpl : PostRepository, Modifier {
         } else {
             likeCount--
         }
-        post = post.copy(likeCount = countModifier(likeCount))
+        post = post.copy(likeCount = likeCount)
         data.value = post
     }
 
     override fun addShareByClick() {
        val s = shareCount++
-        post = post.copy(shareCount = countModifier(s))
+        post = post.copy(shareCount = s)
         data.value = post
     }
 
     override fun addImpressionByClick() {
         val i = impressionCount++
-        post = post.copy(impressionCount = countModifier(i))
+        post = post.copy(impressionCount = i)
         data.value = post
     }
 }
