@@ -30,16 +30,17 @@ class PostsAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onListener: OnListener,
+    private val onLikeListener: OnListener,
     private val onShareListener: OnListener
 ) : RecyclerView.ViewHolder(binding.root), Modifier {
+
     lateinit var post: Post
 
-    init{
-        binding.like.setOnClickListener{
-            onListener(post)
+    init {
+        binding.like.setOnClickListener {
+            onLikeListener(post)
         }
-        binding.share.setOnClickListener{
+        binding.share.setOnClickListener {
             onShareListener(post)
         }
     }
@@ -55,8 +56,6 @@ class PostViewHolder(
             like.setImageResource(
                 if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
             )
-
-
         }
     }
 }
