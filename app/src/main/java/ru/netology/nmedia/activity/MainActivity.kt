@@ -3,6 +3,7 @@ package ru.netology.nmedia.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.R
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
+                viewModel.addShareByClick(post.id)
             }
 
             override fun onRemove(post: Post) {
@@ -50,12 +52,13 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent().apply {
                     action = Intent.ACTION_VIEW
                     Uri.parse(post.video)
-
                 }
-                    if (intent.resolveActivity(packageManager) != null) {
+                   if (intent.resolveActivity(packageManager) != null) {
                         startActivity(intent)
                     }
-                } else return
+               } else {
+                   Log.d("Intent", "Не получается обработать намерение!")
+                }
             }
         })
         binding.list.adapter = adapter

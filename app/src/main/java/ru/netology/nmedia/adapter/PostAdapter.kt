@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.constraintlayout.widget.Group
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -52,6 +53,12 @@ class PostViewHolder(
         binding.share.setOnClickListener {
             onInteractionListener.onShare(post)
         }
+        binding.play.setOnClickListener {
+            onInteractionListener.onYoutube(post) }
+        binding.videoCard.setOnClickListener {
+            onInteractionListener.onYoutube(post) }
+        binding.videoLink.setOnClickListener {
+            onInteractionListener.onYoutube(post) }
     }
     fun bind(post: Post) {
         this.post = post
@@ -67,9 +74,6 @@ class PostViewHolder(
             if (post.video == null) binding.videoGroup.visibility = View.GONE
             else binding.videoGroup.visibility = View.VISIBLE
 
-            videoGroup.setOnClickListener {
-                onInteractionListener.onYoutube(post)
-            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
