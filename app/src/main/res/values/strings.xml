@@ -2,6 +2,8 @@
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
     <string name="description_post_author_avatar">Post author avatar</string>
+    <string name="description_video_card">Video placeholder</string>
+    <string name="description_play_button">Play</string>
     <string name="description_post_menu">Post menu</string>
     <string name="description_post_likes">Post likes</string>
     <string name="description_post_shares">Post shares</string>
@@ -14,4 +16,6 @@
     <string name="cancel_button">Cancel editing</string>
     <string name="editing_mode">Editing</string>
     <string name="editing">Editing</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="add_post">Add post</string>
 </resources>
