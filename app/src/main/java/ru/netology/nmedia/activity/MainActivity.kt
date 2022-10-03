@@ -48,16 +48,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onYoutube(post: Post) {
-                if (post.video != null){
-                val intent = Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    Uri.parse(post.video)
-                }
-                   if (intent.resolveActivity(packageManager) != null) {
-                        startActivity(intent)
+                if (post.video != null) {
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_VIEW
+                        Uri.parse(post.video)
                     }
-               } else {
-                   Log.d("Intent", "Не получается обработать намерение!")
+
+                    startActivity(intent)
                 }
             }
         })
