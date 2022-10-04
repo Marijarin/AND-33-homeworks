@@ -51,10 +51,12 @@ class MainActivity : AppCompatActivity() {
                 if (post.video != null) {
                     val intent = Intent().apply {
                         action = Intent.ACTION_VIEW
-                        Uri.parse(post.video)
+                        data = Uri.parse(post.video)
                     }
 
-                    startActivity(intent)
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(intent)
+                    }
                 }
             }
         })
