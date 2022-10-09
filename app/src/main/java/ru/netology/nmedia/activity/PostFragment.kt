@@ -9,19 +9,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.card_post.view.*
-import kotlinx.android.synthetic.main.fragment_post.*
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.FeedFragment.Companion.idArg
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostViewHolder
-import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-class PostFragment: Fragment() {
+class PostFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +29,7 @@ class PostFragment: Fragment() {
 
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
-        val viewHolder = PostViewHolder(binding.postLayout, object: OnInteractionListener{
+        val viewHolder = PostViewHolder(binding.postLayout, object : OnInteractionListener {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
 
@@ -71,7 +68,7 @@ class PostFragment: Fragment() {
             }
 
             override fun onPost(post: Post) {
-                viewModel.clickById(post.id)
+
                 findNavController().navigateUp()
             }
 
@@ -86,16 +83,14 @@ class PostFragment: Fragment() {
                 })
 
         }
-
+        val postId = arguments?.idArg
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            val post = posts.find{ it.isClicked} ?: run {
+            val post = posts.find { it.id == postId } ?: run {
                 findNavController().navigateUp()
                 return@observe
             }
             viewHolder.bind(post)
         }
-
-
 
         return binding.root
     }

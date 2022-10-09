@@ -9,6 +9,5 @@ data class Post(
     val likeCount: Int,
     val shareCount: Int,
     val impressionCount: Int,
-    val likedByMe: Boolean,
-    val isClicked: Boolean
+    val likedByMe: Boolean
 )

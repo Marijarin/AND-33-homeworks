@@ -35,8 +35,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 999,
                     shareCount = 10,
                     impressionCount = 999,
-                    likedByMe = false,
-                    isClicked = false
+                    likedByMe = false
                 ),
                 Post(
                     id = nextId++,
@@ -47,8 +46,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 999,
                     shareCount = 900,
                     impressionCount = 99_999,
-                    likedByMe = false,
-                    isClicked = false
+                    likedByMe = false
                 ),
                 Post(
                     id = nextId++,
@@ -59,8 +57,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false,
-                    isClicked = false
+                    likedByMe = false
                 ),
                 Post(
                     id = nextId++,
@@ -71,8 +68,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false,
-                    isClicked = false
+                    likedByMe = false
                 ),
                 Post(
                     id = nextId++,
@@ -83,8 +79,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false,
-                    isClicked = false
+                    likedByMe = false
                 ),
                 Post(
                     id = nextId++,
@@ -95,8 +90,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999,
-                    likedByMe = false,
-                    isClicked = false),
+                    likedByMe = false
+                    ),
                 Post(
                     id = nextId++,
                     author = "Нетология. Университет интернет-профессий будущего",
@@ -107,7 +102,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     shareCount = 999,
                     impressionCount = 99_999,
                     likedByMe = false,
-                    isClicked = false
+
                 ),
                 Post(
                     id = nextId++,
@@ -119,7 +114,6 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     shareCount = 1090,
                     impressionCount = 999_999,
                     likedByMe = false,
-                    isClicked = false
 
                 ),
                 Post(
@@ -132,7 +126,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     shareCount = 990,
                     impressionCount = 999_999,
                     likedByMe = false,
-                    isClicked = false
+
                 )
             ).reversed()
         }
@@ -149,7 +143,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     author = "Me",
                     likedByMe = false,
                     published = "now",
-                    isClicked = false
+
                 )
             ) + posts
             data.value = posts
@@ -206,16 +200,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
         data.value = posts
         sync()
     }
-    override fun clickById(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it else {
-                it.copy(isClicked = !it.isClicked)
-            }
 
-        }
-
-        data.value = posts
-    }
 
     private fun sync(){
         prefs.edit().apply{

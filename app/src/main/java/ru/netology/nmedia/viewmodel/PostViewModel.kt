@@ -21,13 +21,12 @@ private val empty = Post(
     likeCount = 0,
     shareCount = 0,
     impressionCount = 0,
-    likedByMe = false,
-    isClicked = false
+    likedByMe = false
 )
 
 class PostViewModel (application: Application): AndroidViewModel(application) {
     // упрощённый вариант
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+    private val repository: PostRepository = PostRepositoryFilesImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
@@ -50,5 +49,5 @@ class PostViewModel (application: Application): AndroidViewModel(application) {
     fun addShareByClick(id: Long) = repository.addShareByClick(id)
     fun addImpressionByClick(id: Long) = repository.addImpressionByClick(id)
     fun removeById(id: Long) = repository.removeById(id)
-    fun clickById(id:Long) = repository.clickById(id)
+
 }

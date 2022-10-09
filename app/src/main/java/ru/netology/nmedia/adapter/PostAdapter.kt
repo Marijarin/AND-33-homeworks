@@ -39,7 +39,9 @@ class PostsAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
-        holder.itemView.setOnClickListener {  }
+
+
+
     }
 }
 
@@ -87,10 +89,7 @@ class PostViewHolder(
             binding.play.setOnClickListener {onInteractionListener.onYoutube(post)}
             binding.videoCard.setOnClickListener {onInteractionListener.onYoutube(post)}
             binding.videoLink.setOnClickListener {onInteractionListener.onYoutube(post)}
-            binding.author.setOnClickListener {onInteractionListener.onPost(post)}
-            binding.content.setOnClickListener { onInteractionListener.onPost(post)}
-
-
+            binding.content.setOnClickListener {onInteractionListener.onPost(post)}
         }
     }
 

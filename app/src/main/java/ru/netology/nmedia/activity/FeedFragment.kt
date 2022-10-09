@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_post.*
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
@@ -65,12 +64,16 @@ class FeedFragment : Fragment() {
             }
 
             override fun onPost(post: Post) {
-                viewModel.clickById(post.id)
+
                 findNavController().navigate(
-                    R.id.action_feedFragment_to_postFragment)
+                    R.id.action_feedFragment_to_postFragment, Bundle().apply {
+                        idArg = post.id
+                    })
+
+                }
 
 
-            }
+
         })
         binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
@@ -96,6 +99,12 @@ class FeedFragment : Fragment() {
 
 
         return binding.root
+    }
+    companion object {
+        private const val ID_KEY = "ID_KEY"
+        var Bundle.idArg: Long
+        set(value) = putLong(ID_KEY, value)
+        get() = getLong("ID_KEY")
     }
 }
 

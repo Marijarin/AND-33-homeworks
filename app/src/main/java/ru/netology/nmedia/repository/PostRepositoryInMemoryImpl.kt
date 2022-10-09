@@ -16,8 +16,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 999,
             shareCount = 10,
             impressionCount = 999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -28,8 +27,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 999,
             shareCount = 900,
             impressionCount = 99_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -40,8 +38,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 9,
             shareCount = 100_900,
             impressionCount = 9_999_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -52,8 +49,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 9,
             shareCount = 100_900,
             impressionCount = 9_999_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -64,8 +60,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 9,
             shareCount = 100_900,
             impressionCount = 9_999_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -76,8 +71,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 9,
             shareCount = 100_900,
             impressionCount = 9_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -88,8 +82,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 999,
             shareCount = 999,
             impressionCount = 99_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         ),
         Post(
             id = nextId++,
@@ -100,8 +93,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 50,
             shareCount = 1090,
             impressionCount = 999_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
 
         ),
         Post(
@@ -113,8 +105,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 5,
             shareCount = 990,
             impressionCount = 999_999,
-            likedByMe = false,
-            isClicked = false
+            likedByMe = false
         )
 
     ).reversed()
@@ -135,8 +126,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     likeCount = 0,
                     shareCount = 0,
                     impressionCount = 0,
-                    content = "",
-                    isClicked = false
+                    content = ""
                 )
             ) + posts
             data.value = posts
@@ -185,16 +175,5 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 
-    override fun clickById(id: Long) {
-
-            posts = posts.map {
-                if (it.id != id) it else {
-                    it.copy(isClicked = !it.isClicked)
-                }
-
-            }
-
-            data.value = posts
-        }
 
 }
