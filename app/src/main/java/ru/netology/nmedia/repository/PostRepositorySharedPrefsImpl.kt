@@ -35,7 +35,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 999,
                     shareCount = 10,
                     impressionCount = 999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -46,7 +47,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 999,
                     shareCount = 900,
                     impressionCount = 99_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -57,7 +59,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -68,7 +71,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -79,7 +83,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -90,8 +95,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 9,
                     shareCount = 100_900,
                     impressionCount = 9_999,
-                    likedByMe = false
-                ),
+                    likedByMe = false,
+                    isClicked = false),
                 Post(
                     id = nextId++,
                     author = "Нетология. Университет интернет-профессий будущего",
@@ -101,7 +106,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 999,
                     shareCount = 999,
                     impressionCount = 99_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 ),
                 Post(
                     id = nextId++,
@@ -112,7 +118,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 50,
                     shareCount = 1090,
                     impressionCount = 999_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
 
                 ),
                 Post(
@@ -124,7 +131,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     likeCount = 5,
                     shareCount = 990,
                     impressionCount = 999_999,
-                    likedByMe = false
+                    likedByMe = false,
+                    isClicked = false
                 )
             ).reversed()
         }
@@ -140,7 +148,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
                     id = nextId++,
                     author = "Me",
                     likedByMe = false,
-                    published = "now"
+                    published = "now",
+                    isClicked = false
                 )
             ) + posts
             data.value = posts
@@ -196,6 +205,16 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
         posts = posts.filter { it.id != id }
         data.value = posts
         sync()
+    }
+    override fun clickById(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else {
+                it.copy(isClicked = !it.isClicked)
+            }
+
+        }
+
+        data.value = posts
     }
 
     private fun sync(){

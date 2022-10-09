@@ -11,4 +11,5 @@ interface PostRepository {
     fun addShareByClick(id: Long)
     fun addImpressionByClick(id: Long)
     fun removeById(id:Long)
+    fun clickById(id:Long)
 }

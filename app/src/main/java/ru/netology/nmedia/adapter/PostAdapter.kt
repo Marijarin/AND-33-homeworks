@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.constraintlayout.widget.Group
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -22,6 +24,7 @@ interface OnInteractionListener {
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun onYoutube(post: Post){}
+    fun onPost (post: Post){}
 }
 
 
@@ -36,6 +39,7 @@ class PostsAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
+        holder.itemView.setOnClickListener {  }
     }
 }
 
@@ -44,24 +48,8 @@ class PostViewHolder(
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root), Modifier {
 
-    lateinit var post: Post
-
-    init {
-        binding.like.setOnClickListener {
-            onInteractionListener.onLike(post)
-        }
-        binding.share.setOnClickListener {
-            onInteractionListener.onShare(post)
-        }
-        binding.play.setOnClickListener {
-            onInteractionListener.onYoutube(post) }
-        binding.videoCard.setOnClickListener {
-            onInteractionListener.onYoutube(post) }
-        binding.videoLink.setOnClickListener {
-            onInteractionListener.onYoutube(post) }
-    }
     fun bind(post: Post) {
-        this.post = post
+
         binding.apply {
             author.text = post.author
             published.text = post.published
@@ -94,6 +82,15 @@ class PostViewHolder(
                     }
                 }.show()
             }
+            binding.like.setOnClickListener {onInteractionListener.onLike(post)}
+            binding.share.setOnClickListener {onInteractionListener.onShare(post)}
+            binding.play.setOnClickListener {onInteractionListener.onYoutube(post)}
+            binding.videoCard.setOnClickListener {onInteractionListener.onYoutube(post)}
+            binding.videoLink.setOnClickListener {onInteractionListener.onYoutube(post)}
+            binding.author.setOnClickListener {onInteractionListener.onPost(post)}
+            binding.content.setOnClickListener { onInteractionListener.onPost(post)}
+
+
         }
     }
 
