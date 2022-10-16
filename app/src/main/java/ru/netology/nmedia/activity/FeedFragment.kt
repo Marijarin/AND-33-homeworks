@@ -42,7 +42,6 @@ class FeedFragment : Fragment() {
                     putExtra(Intent.EXTRA_TEXT, post.content)
                     type = "text/plain"
                 }
-
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
@@ -71,9 +70,6 @@ class FeedFragment : Fragment() {
                     })
 
                 }
-
-
-
         })
         binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
@@ -92,9 +88,17 @@ class FeedFragment : Fragment() {
 
         }
 
-
+        viewModel.draftData.observe(viewLifecycleOwner) {
+            viewModel.draftData
+        }
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_newPostFragment,
+                    Bundle().apply {
+                        textArg = viewModel.draftData.value
+                    })
+
         }
 
 
