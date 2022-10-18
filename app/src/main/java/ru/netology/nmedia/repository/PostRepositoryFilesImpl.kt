@@ -173,7 +173,7 @@ class PostRepositoryFilesImpl(private val context: Context) : PostRepository {
         data.value = posts
     }
 
-    override fun addLikeToLiked(post: Post): Int {
+     fun addLikeToLiked(post: Post): Int {
         val p: Post = if (!post.likedByMe) {
             post.copy(likeCount = (post.likeCount + 1))
         } else {
@@ -189,12 +189,7 @@ class PostRepositoryFilesImpl(private val context: Context) : PostRepository {
         data.value = posts
     }
 
-    override fun addImpressionByClick(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it else it.copy(impressionCount = (it.impressionCount + 1))
-        }
-        data.value = posts
-    }
+
 
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }

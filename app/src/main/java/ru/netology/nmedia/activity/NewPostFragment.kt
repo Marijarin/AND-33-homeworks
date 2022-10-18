@@ -23,18 +23,14 @@ class NewPostFragment : Fragment() {
     ): View {
 
         val binding = FragmentNewPostBinding.inflate(layoutInflater)
-
+        arguments?.textArg.let{binding.edit.setText(it)}
 
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
-
-        viewModel.draftData.observe(viewLifecycleOwner){
-        arguments?.textArg.let{binding.edit.setText(viewModel.draftData.value)}}
 
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
                if (binding.edit.text.isNotBlank()){
                    viewModel.writeDraft(binding.edit.text.toString())
                }
-
                 findNavController().navigateUp()
             }
 

@@ -69,7 +69,7 @@ class FeedFragment : Fragment() {
                         idArg = post.id
                     })
 
-                }
+            }
         })
         binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
@@ -87,28 +87,27 @@ class FeedFragment : Fragment() {
                 })
 
         }
-
         viewModel.draftData.observe(viewLifecycleOwner) {
-            viewModel.draftData
-        }
-        binding.fab.setOnClickListener {
-
+            var draft = viewModel.draftData.value
+            binding.fab.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_newPostFragment,
                     Bundle().apply {
-                        textArg = viewModel.draftData.value
+                        textArg = draft
                     })
+            }
 
         }
 
 
         return binding.root
     }
+
     companion object {
         private const val ID_KEY = "ID_KEY"
         var Bundle.idArg: Long
-        set(value) = putLong(ID_KEY, value)
-        get() = getLong("ID_KEY")
+            set(value) = putLong(ID_KEY, value)
+            get() = getLong("ID_KEY")
     }
 }
 

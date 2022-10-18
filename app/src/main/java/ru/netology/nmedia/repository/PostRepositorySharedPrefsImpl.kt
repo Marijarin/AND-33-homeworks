@@ -170,7 +170,7 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
         sync()
     }
 
-    override fun addLikeToLiked(post: Post): Int {
+     fun addLikeToLiked(post: Post): Int {
         val p: Post = if (!post.likedByMe) {
             post.copy(likeCount = (post.likeCount + 1))
         } else {
@@ -180,16 +180,8 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
     }
 
     override fun addShareByClick(id: Long) {
-        posts = posts.map {
+            posts = posts.map {
             if (it.id != id) it else it.copy(shareCount = (it.shareCount + 1))
-        }
-        data.value = posts
-        sync()
-    }
-
-    override fun addImpressionByClick(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it else it.copy(impressionCount = (it.impressionCount + 1))
         }
         data.value = posts
         sync()

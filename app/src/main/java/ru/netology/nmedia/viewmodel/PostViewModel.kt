@@ -8,7 +8,7 @@ import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.NewPostSharedPrefs
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQLiteImpl
+import ru.netology.nmedia.repository.PostRepositoryImpl
 
 private val empty = Post(
     id = 0,
@@ -24,8 +24,8 @@ private val empty = Post(
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     // упрощённый вариант
-    private val repository: PostRepository = PostRepositorySQLiteImpl(
-        AppDb.getInstance(application).postDao
+    private val repository: PostRepository = PostRepositoryImpl(
+        AppDb.getInstance(application).postDao()
     )
     private val prefsImpl: NewPostSharedPrefs = NewPostSharedPrefs(application)
     val data = repository.getAll()
@@ -36,14 +36,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = post
     }
 
-    fun save() {
-        edited.value?.let {
-            repository.save(it)
-        }
-        edited.value = empty
-    }
-
-    fun changeContentAndSave(content: String) {
+   fun changeContentAndSave(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
             return
@@ -54,21 +47,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = empty
     }
 
-    fun changeContent(content: String) {
-        val text = content.trim()
-        if (edited.value?.content == text) {
-            return
-        }
-        edited.value = edited.value?.copy(content = text)
-    }
-
     fun likeById(id: Long) = repository.likeById(id)
     fun addShareByClick(id: Long) = repository.addShareByClick(id)
-    fun addImpressionByClick(id: Long) = repository.addImpressionByClick(id)
     fun removeById(id: Long) = repository.removeById(id)
 
-    fun writeDraft(dr:String){
-        prefsImpl.syncDraft(dr)
+    fun writeDraft(draft:String){
+        prefsImpl.syncDraft(draft)
     }
 
 }
