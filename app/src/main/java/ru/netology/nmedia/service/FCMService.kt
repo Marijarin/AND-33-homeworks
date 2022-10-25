@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import ru.netology.nmedia.R
+import ru.netology.nmedia.dto.Post
 import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
@@ -45,6 +46,15 @@ class FCMService : FirebaseMessagingService() {
                             Like::class.java
                         )
                     )
+                    Action.POST -> handlePost(
+                        gson.fromJson(message.data[content],
+                            Post::class.java
+                        )
+                    )
+                    Action.EMPTY ->  Log.e(
+                        "push sender",
+                        "wrong message -> please send this log to server tech support"
+                    )
                 }
             } catch (error: IllegalArgumentException){
                 Log.e(
@@ -75,10 +85,28 @@ class FCMService : FirebaseMessagingService() {
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000), notification)
     }
+
+    private fun handlePost (content:Post){
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_published,
+                    content.author
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText(content.content))
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify((Random.nextInt(100_000)+31), notification)
+    }
 }
 
 enum class Action {
-    LIKE,
+    LIKE, POST, EMPTY
 }
 
 data class Like(

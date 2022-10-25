@@ -20,8 +20,9 @@
     <string name="description_video_card">Заглушка для видео</string>
     <string name="description_play_button">Проигрывание</string>
     <string name="google_play_unavailable">Google API недоступно</string>
-    <string name="notification_user_liked">Пользователь%1$s поствил лайк посту%2$s</string>
+    <string name="notification_user_liked">Пользователь%1$s поставил лайк посту%2$s</string>
     <string name="channel_remote_name">Уведомления с сервера</string>
     <string name="channel_remote_description">Уведомления с удаленного сервера</string>
+    <string name="notification_user_published">Пользователь%1$s опубликовал новый пост-></string>
 
 </resources>
